@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using PG5200_Innlevering1.SettingsEditor.Model;
-using Øving2.Model;
 
 namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 {
@@ -15,353 +15,318 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
     /// </para>
     /// </summary>
     public class MainViewModel : ViewModelBase
-    { 
-    private Character _character;
+    {
+        private Character _character;
 
         #region Properties
 
-    public enum Races
-    {
-        Dwarf,
-        Elf,
-        Gnome,
-        HalfElf,
-        HalfOrc,
-        Halfling,
-        Human
-    }
-
-    public IEnumerable<Races> e_Races
-    {
-        get
+        public enum Races
         {
-            return (IEnumerable<Races>)Enum.GetValues(typeof(Races));
-        }
-    }
-
-    private int[] attributes = new int[6];
-
-    public void updateAttr()
-    {
-        attributes[0] = Strength;
-        attributes[1] = Dexterity;
-        attributes[2] = Constitution;
-        attributes[3] = Intelligence;
-        attributes[4] = Wisdom;
-        attributes[5] = Charisma;
-    }
-
-    public string CharacterName
-    {
-        get
-        {
-            return _character.CharacterName;
+            Dwarf,
+            Elf,
+            Gnome,
+            HalfElf,
+            HalfOrc,
+            Halfling,
+            Human
         }
 
-        set
+        public IEnumerable<Races> e_Races
         {
-            if (_character.CharacterName != value)
+            get { return (IEnumerable<Races>) Enum.GetValues(typeof (Races)); }
+        }
+
+        private int[] attributes = new int[6];
+
+        public void updateAttr()
+        {
+            attributes[0] = Strength;
+            attributes[1] = Dexterity;
+            attributes[2] = Constitution;
+            attributes[3] = Intelligence;
+            attributes[4] = Wisdom;
+            attributes[5] = Charisma;
+        }
+
+        public string CharacterName
+        {
+            get { return _character.CharacterName; }
+
+            set
             {
-                _character.CharacterName = value;
-                SaveCommand.CanExecute(null);
-                RaisePropertyChanged();
-            }
-        }
-    }
-
-    public Races Race
-    {
-        get
-        {
-            return _character.Race;
-        }
-
-        set
-        {
-            if (_character.Race != value)
-            {
-                _character.Race = value;
-                RaisePropertyChanged();
-            }
-        }
-    }
-
-    public int Level
-    {
-        get
-        {
-            return _character.Level;
-        }
-
-        set
-        {
-            if (_character.Level != value)
-            {
-                // Example of input validation.
-                if (value > 0)
+                if (_character.CharacterName != value)
                 {
-                    _character.Level = value;
+                    _character.CharacterName = value;
+                    SaveCommand.CanExecute(null);
+                    RaisePropertyChanged();
                 }
-                RaisePropertyChanged();
             }
         }
-    }
 
-    public int AttributePoints
-    {
-        get
+        public Races Race
         {
-            return _character.AttributePoints;
-        }
-        set
-        {
-            if (_character.AttributePoints != value)
+            get { return _character.Race; }
+
+            set
             {
-                _character.AttributePoints = value;
-                SaveCommand.CanExecute(null);
-                RaisePropertyChanged();
+                if (_character.Race != value)
+                {
+                    _character.Race = value;
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
-    public int Strength
-    {
-        get
+        public int Level
         {
-            return _character.Strength;
-        }
+            get { return _character.Level; }
 
-        set
-        {
-            if (_character.Strength != value)
+            set
             {
-                _character.Strength = value;
-
-                PerformPointSpend();
-                RaisePropertyChanged();
+                if (_character.Level != value)
+                {
+                    // Example of input validation.
+                    if (value > 0)
+                    {
+                        _character.Level = value;
+                    }
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
-
-    public int Dexterity
-    {
-        get
+        public int AttributePoints
         {
-            return _character.Dexterity;
-        }
-
-        set
-        {
-            if (_character.Dexterity != value)
+            get { return _character.AttributePoints; }
+            set
             {
-                _character.Dexterity = value;
-
-                PerformPointSpend();
-                RaisePropertyChanged();
+                if (_character.AttributePoints != value)
+                {
+                    _character.AttributePoints = value;
+                    SaveCommand.CanExecute(null);
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
-
-    public int Constitution
-    {
-        get
+        public int Strength
         {
-            return _character.Constitution;
-        }
+            get { return _character.Strength; }
 
-        set
-        {
-            if (_character.Constitution != value)
+            set
             {
-                _character.Constitution = value;
+                if (_character.Strength != value)
+                {
+                    _character.Strength = value;
 
-                PerformPointSpend();
-                RaisePropertyChanged();
+                    PerformPointSpend();
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
 
-    public int Intelligence
-    {
-        get
+        public int Dexterity
         {
-            return _character.Intelligence;
-        }
+            get { return _character.Dexterity; }
 
-        set
-        {
-            if (_character.Intelligence != value)
+            set
             {
-                _character.Intelligence = value;
+                if (_character.Dexterity != value)
+                {
+                    _character.Dexterity = value;
 
-                PerformPointSpend();
-                RaisePropertyChanged();
+                    PerformPointSpend();
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
 
-    public int Wisdom
-    {
-        get
+        public int Constitution
         {
-            return _character.Wisdom;
-        }
+            get { return _character.Constitution; }
 
-        set
-        {
-            if (_character.Wisdom != value)
+            set
             {
-                _character.Wisdom = value;
+                if (_character.Constitution != value)
+                {
+                    _character.Constitution = value;
 
-                PerformPointSpend();
-                RaisePropertyChanged();
+                    PerformPointSpend();
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
-    public int Charisma
-    {
-        get
-        {
-            return _character.Charisma;
-        }
 
-        set
+        public int Intelligence
         {
-            if (_character.Charisma != value)
+            get { return _character.Intelligence; }
+
+            set
             {
-                _character.Charisma = value;
+                if (_character.Intelligence != value)
+                {
+                    _character.Intelligence = value;
 
-                PerformPointSpend();
-                RaisePropertyChanged();
+                    PerformPointSpend();
+                    RaisePropertyChanged();
+                }
             }
         }
-    }
 
-    #endregion
 
-    public void PerformPointSpend()
-    {
-        updateAttr();
-        int pts = 15;
-        for (int i = 0; i < 5; i++)
+        public int Wisdom
         {
-            pts += ptsConversion(attributes[i]);
+            get { return _character.Wisdom; }
+
+            set
+            {
+                if (_character.Wisdom != value)
+                {
+                    _character.Wisdom = value;
+
+                    PerformPointSpend();
+                    RaisePropertyChanged();
+                }
+            }
         }
-        AttributePoints = pts;
-    }
-    private int ptsConversion(int pts)
-    {
-        switch (pts)
+
+        public int Charisma
         {
-            case 7:
-                return 4;
-            case 8:
-                return 2;
-            case 9:
-                return 1;
-            case 10:
-                return 0;
-            case 11:
-                return -1;
-            case 12:
-                return -2;
-            case 13:
-                return -3;
-            case 14:
-                return -5;
-            case 15:
-                return -7;
-            case 16:
-                return -10;
-            case 17:
-                return -13;
-            case 18:
-                return -17;
-            default:
-                return 0;
+            get { return _character.Charisma; }
+
+            set
+            {
+                if (_character.Charisma != value)
+                {
+                    _character.Charisma = value;
+
+                    PerformPointSpend();
+                    RaisePropertyChanged();
+                }
+            }
         }
-    }
-    #region Commands
 
-    public ICommand SaveCommand
-    {
-        get; set;
-    }
+        #endregion
 
-    public ICommand LoadCommand
-    {
-        get; private set;
-    }
-    public ICommand NewCommand
-    {
-        get; private set;
-    }
-    #endregion
+        public void PerformPointSpend()
+        {
+            updateAttr();
+            int pts = 15;
+            for (int i = 0; i < 5; i++)
+            {
+                pts += ptsConversion(attributes[i]);
+            }
+            AttributePoints = pts;
+        }
 
-    /// <summary>
-    /// Initializes a new instance of the MainViewModel class.
-    /// </summary>
-    public MainViewModel()
-    {
-        _character = new Character();
+        private int ptsConversion(int pts)
+        {
+            switch (pts)
+            {
+                case 7:
+                    return 4;
+                case 8:
+                    return 2;
+                case 9:
+                    return 1;
+                case 10:
+                    return 0;
+                case 11:
+                    return -1;
+                case 12:
+                    return -2;
+                case 13:
+                    return -3;
+                case 14:
+                    return -5;
+                case 15:
+                    return -7;
+                case 16:
+                    return -10;
+                case 17:
+                    return -13;
+                case 18:
+                    return -17;
+                default:
+                    return 0;
+            }
+        }
 
-        CreateCommands();
-    }
-    private void CreateCommands()
-    {
-        NewCommand = new RelayCommand(NewCharacter);
-        SaveCommand = new RelayCommand(Save, CanSave);
-        LoadCommand = new RelayCommand(Load);
-    }
+        #region Commands
 
-    private bool CanSave()
-    { //TODO: Additional validation
-        return (!string.IsNullOrWhiteSpace(CharacterName) && AttributePoints >= 0 && Level >= 1);
-    }
+        public ICommand SaveCommand { get; set; }
 
-    public void NewCharacter()
-    {
-        PopulateView(new Character());
-    }
+        public ICommand LoadCommand { get; private set; }
+        public ICommand NewCommand { get; private set; }
 
-    string path = "../../Character.json";
-    public void Save()
-    {
+        #endregion
 
-        StreamWriter writer = new StreamWriter(path);
-        writer.Write(_character.Save());
-        writer.Close();
-    }
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class.
+        /// </summary>
+        public MainViewModel()
+        {
+            _character = new Character();
 
-    public void Load()
-    {
-        StreamReader reader = new StreamReader(path);
+            CreateCommands();
+        }
 
-        Character model = _character.Load(reader.ReadToEnd());
+        private void CreateCommands()
+        {
+            NewCommand = new RelayCommand(NewCharacter);
+            SaveCommand = new RelayCommand(Save, CanSave);
+            LoadCommand = new RelayCommand(Load);
+        }
 
-        if (model != null)
-            PopulateView(model);
+        private bool CanSave()
+        {
+            //TODO: Additional validation
+            return true;
+        }
 
-        reader.Close();
-    }
+        public void NewCharacter()
+        {
+            PopulateView(new Character());
+        }
 
-    public void PopulateView(Character model)
-    {
-        CharacterName = model.CharacterName;
-        Race = model.Race;
-        Level = model.Level;
+        private string path = "../../Character.json";
 
-        AttributePoints = model.AttributePoints;
-        Strength = model.Strength;
-        Dexterity = model.Dexterity;
-        Constitution = model.Constitution;
-        Intelligence = model.Intelligence;
-        Wisdom = model.Wisdom;
-        Charisma = model.Charisma;
+        public void Save()
+        {
+
+            StreamWriter writer = new StreamWriter(path);
+            writer.Write(_character.Save());
+            writer.Close();
+        }
+
+        public void Load()
+        {
+            StreamReader reader = new StreamReader(path);
+
+            Character model = _character.Load(reader.ReadToEnd());
+
+            if (model != null)
+                PopulateView(model);
+
+            reader.Close();
+        }
+
+        public void PopulateView(Character model)
+        {
+            CharacterName = model.CharacterName;
+            Race = model.Race;
+            Level = model.Level;
+
+            AttributePoints = model.AttributePoints;
+            Strength = model.Strength;
+            Dexterity = model.Dexterity;
+            Constitution = model.Constitution;
+            Intelligence = model.Intelligence;
+            Wisdom = model.Wisdom;
+            Charisma = model.Charisma;
+        }
     }
 }

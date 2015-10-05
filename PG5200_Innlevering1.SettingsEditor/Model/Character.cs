@@ -3,13 +3,12 @@ using System;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using System.Windows;
-using Øving2.ViewModel;
 using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
+using PG5200_Innlevering1.SettingsEditor.ViewModel;
 
-namespace Øving2.Model
+namespace PG5200_Innlevering1.SettingsEditor.Model
 {
 	public class Character 
     {
