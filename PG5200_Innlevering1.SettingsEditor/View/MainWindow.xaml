@@ -1,0 +1,98 @@
+﻿<Window x:Class="PG5200_Innlevering1.SettingsEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Height="360"
+        Width="640"
+        Title="MVVM Light Application"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot" Margin="0, 0, 0, 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="273*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="233*"/>
+            <ColumnDefinition Width="399*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="LayoutTitle" Margin="10" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label Content="Character Name"/>
+            <TextBox Margin="0, 3, 0, 3" Width="200" Text="{Binding CharacterName}" />
+            <Label Margin="20,0,0,0" Content="Race" />
+            <ComboBox Margin="10,3,0,3" Width="77" ItemsSource="{Binding e_Races}" SelectedItem="{Binding Race}"/>
+            <Label Margin="40,0,0,0" Content="Level" />
+            <TextBox Margin="10,3,0,3" Width="53" Text="{Binding Level}"  />
+        </StackPanel>
+
+        <Label x:Name="Label1" Content="Character Name" HorizontalAlignment="Left" Margin="1,321,0,-37" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="20" Height="0" Width="189" Grid.Column="1" Grid.Row="1"/>
+        <Grid Margin="10" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Margin" Value="4" />
+                    <Setter Property="FontFamily" Value="Bitstream Vera Sans Mono" />
+                    <Setter Property="FontSize" Value="17" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalAlignment" Value="Right" />
+                </Style>
+                <Style x:Key="AttributesHeaderStyle" TargetType="Label">
+                    <Setter Property="FontSize" Value="19" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="FontFamily" Value="Bitstream Vera Sans Mono" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+            </Grid.Resources>
+
+            <Label Content="ATTRIBUTE PTS." Grid.Row="0" Grid.Column="0" Style="{StaticResource AttributesHeaderStyle}"/>
+            <Label Content="STRENGTH"       Grid.Row="1" Grid.Column="0" />
+            <Label Content="DEXTERITY"	    Grid.Row="2" Grid.Column="0" />
+            <Label Content="CONSTITUTION"   Grid.Row="3" Grid.Column="0" />
+            <Label Content="INTELLIGENCE"   Grid.Row="4" Grid.Column="0" />
+            <Label Content="WISDOM"         Grid.Row="5" Grid.Column="0" />
+            <Label Content="CHARISMA"		Grid.Row="6" Grid.Column="0" />
+
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding AttributePoints}" Style="{StaticResource AttributesHeaderStyle}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Strength}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Dexterity}" />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Constitution}" />
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Intelligence}" />
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Wisdom}" />
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Charisma}" />
+        </Grid>
+        <Button Content="Default" Grid.Column="1" Margin="177,191,0,10" BorderThickness="2" Command="{Binding Path=NewCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
+        <Button Content="Save" Grid.Column="1" Margin="257,191,0,10" BorderThickness="2" Command="{Binding Path=SaveCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
+        <Button Content="Load" Grid.Column="1" Margin="337,191,10,10" BorderThickness="2" Command="{Binding Path=LoadCommand}" Grid.Row="1"/>
+
+    </Grid>
+</Window>
