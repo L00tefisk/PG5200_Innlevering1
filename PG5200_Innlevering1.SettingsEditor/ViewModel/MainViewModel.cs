@@ -16,7 +16,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private Character _character;
+        private Enemy _enemy;
 
         #region Properties
 
@@ -36,27 +36,16 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
             get { return (IEnumerable<Races>) Enum.GetValues(typeof (Races)); }
         }
 
-        private int[] attributes = new int[6];
-
-        public void updateAttr()
-        {
-            attributes[0] = Strength;
-            attributes[1] = Dexterity;
-            attributes[2] = Constitution;
-            attributes[3] = Intelligence;
-            attributes[4] = Wisdom;
-            attributes[5] = Charisma;
-        }
-
+  
         public string CharacterName
         {
-            get { return _character.CharacterName; }
+            get { return _enemy.CharacterName; }
 
             set
             {
-                if (_character.CharacterName != value)
+                if (_enemy.CharacterName != value)
                 {
-                    _character.CharacterName = value;
+                    _enemy.CharacterName = value;
                     SaveCommand.CanExecute(null);
                     RaisePropertyChanged();
                 }
@@ -65,13 +54,13 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public Races Race
         {
-            get { return _character.Race; }
+            get { return _enemy.Race; }
 
             set
             {
-                if (_character.Race != value)
+                if (_enemy.Race != value)
                 {
-                    _character.Race = value;
+                    _enemy.Race = value;
                     RaisePropertyChanged();
                 }
             }
@@ -79,16 +68,16 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Level
         {
-            get { return _character.Level; }
+            get { return _enemy.Health; }
 
             set
             {
-                if (_character.Level != value)
+                if (_enemy.Health != value)
                 {
                     // Example of input validation.
                     if (value > 0)
                     {
-                        _character.Level = value;
+                        _enemy.Health = value;
                     }
                     RaisePropertyChanged();
                 }
@@ -97,12 +86,12 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int AttributePoints
         {
-            get { return _character.AttributePoints; }
+            get { return _enemy.AttributePoints; }
             set
             {
-                if (_character.AttributePoints != value)
+                if (_enemy.AttributePoints != value)
                 {
-                    _character.AttributePoints = value;
+                    _enemy.AttributePoints = value;
                     SaveCommand.CanExecute(null);
                     RaisePropertyChanged();
                 }
@@ -111,15 +100,14 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Strength
         {
-            get { return _character.Strength; }
+            get { return _enemy.AttackSpeed; }
 
             set
             {
-                if (_character.Strength != value)
+                if (_enemy.AttackSpeed != value)
                 {
-                    _character.Strength = value;
-
-                    PerformPointSpend();
+                    _enemy.AttackSpeed = value;
+                    
                     RaisePropertyChanged();
                 }
             }
@@ -128,15 +116,14 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Dexterity
         {
-            get { return _character.Dexterity; }
+            get { return _enemy.Damage; }
 
             set
             {
-                if (_character.Dexterity != value)
+                if (_enemy.Damage != value)
                 {
-                    _character.Dexterity = value;
-
-                    PerformPointSpend();
+                    _enemy.Damage = value;
+                    
                     RaisePropertyChanged();
                 }
             }
@@ -145,15 +132,14 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Constitution
         {
-            get { return _character.Constitution; }
+            get { return _enemy.ScoreValue; }
 
             set
             {
-                if (_character.Constitution != value)
+                if (_enemy.ScoreValue != value)
                 {
-                    _character.Constitution = value;
-
-                    PerformPointSpend();
+                    _enemy.ScoreValue = value;
+                    
                     RaisePropertyChanged();
                 }
             }
@@ -162,15 +148,14 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Intelligence
         {
-            get { return _character.Intelligence; }
+            get { return _enemy.Intelligence; }
 
             set
             {
-                if (_character.Intelligence != value)
+                if (_enemy.Intelligence != value)
                 {
-                    _character.Intelligence = value;
-
-                    PerformPointSpend();
+                    _enemy.Intelligence = value;
+                    
                     RaisePropertyChanged();
                 }
             }
@@ -179,15 +164,14 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Wisdom
         {
-            get { return _character.Wisdom; }
+            get { return _enemy.Wisdom; }
 
             set
             {
-                if (_character.Wisdom != value)
+                if (_enemy.Wisdom != value)
                 {
-                    _character.Wisdom = value;
-
-                    PerformPointSpend();
+                    _enemy.Wisdom = value;
+                    
                     RaisePropertyChanged();
                 }
             }
@@ -195,15 +179,14 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public int Charisma
         {
-            get { return _character.Charisma; }
+            get { return _enemy.Charisma; }
 
             set
             {
-                if (_character.Charisma != value)
+                if (_enemy.Charisma != value)
                 {
-                    _character.Charisma = value;
-
-                    PerformPointSpend();
+                    _enemy.Charisma = value;
+                    
                     RaisePropertyChanged();
                 }
             }
@@ -211,16 +194,6 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         #endregion
 
-        public void PerformPointSpend()
-        {
-            updateAttr();
-            int pts = 15;
-            for (int i = 0; i < 5; i++)
-            {
-                pts += ptsConversion(attributes[i]);
-            }
-            AttributePoints = pts;
-        }
 
         private int ptsConversion(int pts)
         {
@@ -269,7 +242,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            _character = new Character();
+            _enemy = new Enemy();
 
             CreateCommands();
         }
@@ -289,16 +262,16 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 
         public void NewCharacter()
         {
-            PopulateView(new Character());
+            PopulateView(new Enemy());
         }
 
-        private string path = "../../Character.json";
+        private string path = "../../Enemy.json";
 
         public void Save()
         {
 
             StreamWriter writer = new StreamWriter(path);
-            writer.Write(_character.Save());
+            writer.Write(_enemy.Save());
             writer.Close();
         }
 
@@ -306,7 +279,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         {
             StreamReader reader = new StreamReader(path);
 
-            Character model = _character.Load(reader.ReadToEnd());
+            Enemy model = _enemy.Load(reader.ReadToEnd());
 
             if (model != null)
                 PopulateView(model);
@@ -314,16 +287,16 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
             reader.Close();
         }
 
-        public void PopulateView(Character model)
+        public void PopulateView(Enemy model)
         {
             CharacterName = model.CharacterName;
             Race = model.Race;
-            Level = model.Level;
+            Level = model.Health;
 
             AttributePoints = model.AttributePoints;
-            Strength = model.Strength;
-            Dexterity = model.Dexterity;
-            Constitution = model.Constitution;
+            Strength = model.AttackSpeed;
+            Dexterity = model.Damage;
+            Constitution = model.ScoreValue;
             Intelligence = model.Intelligence;
             Wisdom = model.Wisdom;
             Charisma = model.Charisma;
