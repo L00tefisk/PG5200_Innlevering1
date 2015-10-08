@@ -20,24 +20,15 @@
 
     <Grid x:Name="LayoutRoot" Margin="0, 0, 0, 10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="273*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="233*"/>
-            <ColumnDefinition Width="399*"/>
+            <ColumnDefinition Width="153*"/>
+            <ColumnDefinition Width="163*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="LayoutTitle" Margin="10" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Label Content="Enemy Name"/>
-            <TextBox Margin="0, 3, 0, 3" Width="200" Text="{Binding CharacterName}" />
-            <Label Margin="20,0,0,0" Content="Race" />
-            <ComboBox Margin="10,3,0,3" Width="77" ItemsSource="{Binding e_Races}" SelectedItem="{Binding Race}"/>
-            <Label Margin="40,0,0,0" Content="Health" />
-            <TextBox Margin="10,3,0,3" Width="53" Text="{Binding Level}"  />
-        </StackPanel>
+        <StackPanel x:Name="LayoutTitle" Margin="10" Grid.ColumnSpan="2" Orientation="Horizontal"/>
 
-        <Label x:Name="Label1" Content="Enemy Name" HorizontalAlignment="Left" Margin="1,321,0,-37" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="20" Height="0" Width="189" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="Label1" Content="Enemy Name" HorizontalAlignment="Left" Margin="1,321,0,-57" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="20" Height="0" Width="189" Grid.Column="1" Grid.Row="1"/>
         <Grid Margin="10" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40*"/>
@@ -74,25 +65,26 @@
                 </Style>
             </Grid.Resources>
 
-            <Label Content="ATTRIBUTE PTS." Grid.Row="0" Grid.Column="0" Style="{StaticResource AttributesHeaderStyle}"/>
-            <Label Content="STRENGTH"       Grid.Row="1" Grid.Column="0" />
-            <Label Content="DEXTERITY"	    Grid.Row="2" Grid.Column="0" />
-            <Label Content="CONSTITUTION"   Grid.Row="3" Grid.Column="0" />
-            <Label Content="INTELLIGENCE"   Grid.Row="4" Grid.Column="0" />
-            <Label Content="WISDOM"         Grid.Row="5" Grid.Column="0" />
-            <Label Content="CHARISMA"		Grid.Row="6" Grid.Column="0" />
+            <Label Content="Name" Grid.Row="0" Grid.Column="0"/>
+            <Label Content="Health"       Grid.Row="1" Grid.Column="0" />
+            <Label Content="Move Speed"	    Grid.Row="2" Grid.Column="0" />
+            <Label Content="Damage"   Grid.Row="3" Grid.Column="0" />
+            <Label Content="Attack Speed"   Grid.Row="4" Grid.Column="0" />
+            <Label Content="Score Value"         Grid.Row="5" Grid.Column="0" />
+            <Label Content="Spawn Time"		Grid.Row="6" Grid.Column="0" />
 
-            <Label Grid.Row="0" Grid.Column="1" Content="{Binding AttributePoints}" Style="{StaticResource AttributesHeaderStyle}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Strength}" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Dexterity}" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Constitution}" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Intelligence}" />
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Wisdom}" />
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Charisma}" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentEnemy.Name}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentEnemy.Health}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentEnemy.MoveSpeed}" />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentEnemy.Damage}" />
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentEnemy.AttackSpeed}" />
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding CurrentEnemy.ScoreValue}" />
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding CurrentEnemy.SpawnTime}" />
         </Grid>
-        <Button Content="Default" Grid.Column="1" Margin="177,191,0,10" BorderThickness="2" Command="{Binding Path=NewCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
-        <Button Content="Save" Grid.Column="1" Margin="257,191,0,10" BorderThickness="2" Command="{Binding Path=SaveCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
-        <Button Content="Load" Grid.Column="1" Margin="337,191,10,10" BorderThickness="2" Command="{Binding Path=LoadCommand}" Grid.Row="1"/>
+        <Button Content="Default" Grid.Column="1" Margin="10,191,0,10" BorderThickness="2" Command="{Binding Path=NewCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
+        <Button Content="Save" Grid.Column="1" Margin="90,191,0,10" BorderThickness="2" Command="{Binding Path=SaveCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
+        <Button Content="Load" Grid.Column="1" Margin="170,191,0,10" BorderThickness="2" Command="{Binding Path=LoadCommand}" Grid.Row="1" HorizontalAlignment="Left" Width="84"/>
+        <ListBox Margin="186,10,10,175" ItemsSource="{Binding Enemies}" SelectedItem="{Binding CurrentEnemy, Mode=TwoWay}" DisplayMemberPath="Name" Grid.Column="1" Grid.Row="1"/>
 
     </Grid>
 </Window>

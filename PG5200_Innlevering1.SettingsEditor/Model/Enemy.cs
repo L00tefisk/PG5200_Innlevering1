@@ -11,25 +11,16 @@ using PG5200_Innlevering1.SettingsEditor.ViewModel;
 namespace PG5200_Innlevering1.SettingsEditor.Model
 {
 	public class Enemy 
-    {
-        public string Notes { get; set; }
-
+    {        
+        public string Name { get; set; }
         
-        public string CharacterName { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public MainViewModel.Races Race { get; set; }
-
-        [JsonConverter(typeof(StringEnumConverter))]
         public int Health { get; set; }
+        public float MoveSpeed { get; set; }
+        public int Damage { get; set; }
+        public float AttackSpeed { get; set; }
 
-        public int AttributePoints { get; set; }
-        public int AttackSpeed { get; set; }
-		public int Damage { get; set; }
-		public int ScoreValue { get; set; }
-		public int Intelligence { get; set; }
-		public int Wisdom { get; set; }
-		public int Charisma { get; set; }
+        public int ScoreValue { get; set; }
+        public int SpawnTime { get; set; }
 
 
 		public Enemy()
@@ -39,18 +30,14 @@ namespace PG5200_Innlevering1.SettingsEditor.Model
 
 		private void SetDefaults()
 		{
-			CharacterName = "";
-			Race = 0;
-			Health = 1;
-
-            AttributePoints = 15;
-            AttackSpeed = 10;
-			Damage = 10;
-			ScoreValue = 10;
-			Intelligence = 10;
-			Wisdom = 10;
-			Charisma = 10;
-		}
+            Name = "Zom";
+            Health = 100;
+            MoveSpeed = 2.5f;
+            Damage = 10;
+            AttackSpeed = 0.5f;
+            ScoreValue = 10;
+            SpawnTime = 3;
+        }
 
     }
 }
