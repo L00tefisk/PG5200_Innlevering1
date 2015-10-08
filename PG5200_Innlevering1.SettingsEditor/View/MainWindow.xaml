@@ -73,18 +73,20 @@
             <Label Content="Score Value"         Grid.Row="5" Grid.Column="0" />
             <Label Content="Spawn Time"		Grid.Row="6" Grid.Column="0" />
 
-            <TextBox Grid.Row="0" Text="{Binding CurrentEnemy.Name}" Margin="117,5,5,5" Grid.ColumnSpan="2"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentEnemy.Health}" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentEnemy.MoveSpeed}" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentEnemy.Damage}" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentEnemy.AttackSpeed}" />
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding CurrentEnemy.ScoreValue}" />
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding CurrentEnemy.SpawnTime}" />
+            <TextBox Grid.Row="0" Text="{Binding SelectedItem.Name}" Margin="117,5,5,5" Grid.ColumnSpan="2"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItem.Health}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.MoveSpeed}" />
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedItem.Damage}" />
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedItem.AttackSpeed}" />
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedItem.ScoreValue}" />
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SelectedItem.SpawnTime}" />
         </Grid>
-        <Button Content="Default" Grid.Column="1" Margin="10,191,0,10" BorderThickness="2" Command="{Binding Path=DefaultCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
-        <Button Content="Save" Grid.Column="1" Margin="90,191,0,10" BorderThickness="2" Command="{Binding Path=SaveCommand}" HorizontalAlignment="Left" Width="75" Grid.Row="1"/>
-        <Button Content="Load" Grid.Column="1" Margin="170,191,0,10" BorderThickness="2" Command="{Binding Path=LoadCommand}" Grid.Row="1" HorizontalAlignment="Left" Width="84"/>
-        <ListBox Margin="186,10,10,175" ItemsSource="{Binding Enemies}" SelectedItem="{Binding CurrentEnemy, Mode=TwoWay}" DisplayMemberPath="Name" Grid.Column="1" Grid.Row="1"/>
+        <Button Content="New" Grid.Column="1" Margin="10,10,0,271" BorderThickness="2" Command="{Binding Path=NewCommand}" HorizontalAlignment="Left" Width="75" />
+        <Button Content="Remove" Grid.Column="1" Margin="10,53,0,226" BorderThickness="2" Command="{Binding Path=RemoveCommand}" HorizontalAlignment="Left" Width="75" />
+        <Button Content="Default" Grid.Column="1" Margin="10,274,0,10" BorderThickness="2" Command="{Binding Path=DefaultCommand}" HorizontalAlignment="Left" Width="75"/>
+        <Button Content="Save" Grid.Column="1" Margin="90,274,0,10" BorderThickness="2" Command="{Binding Path=SaveCommand}" HorizontalAlignment="Left" Width="75"/>
+        <Button Content="Load" Grid.Column="1" Margin="170,274,0,10" BorderThickness="2" Command="{Binding Path=LoadCommand}" HorizontalAlignment="Left" Width="84"/>
+        <ListBox Margin="186,10,10,175" ItemsSource="{Binding Enemies}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" DisplayMemberPath="Name" Grid.Column="1" Grid.Row="1"/>
 
     </Grid>
 </Window>
