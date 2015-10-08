@@ -13,6 +13,9 @@ sysinfo.txt
 # ===================================== #
 [Ee]xported[Oo]bj/
 .vs/
+[Bb]in/
+[Oo]bj
+
 /*.userprefs
 /*.csproj
 /*.pidb
@@ -20,6 +23,7 @@ sysinfo.txt
 /*.user
 /*.unityproj
 /*.booproj
+
  
 # ============ #
 # OS generated #
