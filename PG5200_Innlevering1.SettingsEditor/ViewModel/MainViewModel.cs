@@ -88,7 +88,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         }
         public void RemoveItem()
         {
-            Enemies.Remove(_selectedItem);
+            Enemies.Remove(SelectedItem);
         }
         private bool CanSave()
         {
