@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="http://www.galasoft.ch/ignore"
         mc:Ignorable="d ignore"
-        Height="360"
-        Width="640"
+        Height="350"
+        Width="530"
         Title="MVVM Light Application"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
 
@@ -18,75 +18,92 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="LayoutRoot" Margin="0, 0, 0, 10">
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="153*"/>
-            <ColumnDefinition Width="163*"/>
-        </Grid.ColumnDefinitions>
+    <Grid x:Name="LayoutRoot">
 
-        <StackPanel x:Name="LayoutTitle" Margin="10" Grid.ColumnSpan="2" Orientation="Horizontal"/>
-
-        <Label x:Name="Label1" Content="Enemy Name" HorizontalAlignment="Left" Margin="1,321,0,-57" VerticalAlignment="Top" FontFamily="Arial Black" FontSize="20" Height="0" Width="189" Grid.Column="1" Grid.Row="1"/>
-        <Grid Margin="10" Grid.Row="1">
+        <Grid x:Name="LayoutMain" Margin="10" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-                <RowDefinition Height="20*"/>
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="Label">
-                    <Setter Property="Margin" Value="4" />
-                    <Setter Property="FontFamily" Value="Bitstream Vera Sans Mono" />
-                    <Setter Property="FontSize" Value="17" />
-                    <Setter Property="FontWeight" Value="Bold" />
-                    <Setter Property="HorizontalAlignment" Value="Right" />
-                </Style>
-                <Style x:Key="AttributesHeaderStyle" TargetType="Label">
-                    <Setter Property="FontSize" Value="19" />
-                    <Setter Property="FontWeight" Value="Bold" />
-                    <Setter Property="HorizontalAlignment" Value="Center" />
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="5" />
-                    <Setter Property="FontFamily" Value="Bitstream Vera Sans Mono" />
-                    <Setter Property="FontSize" Value="15" />
-                    <Setter Property="FontWeight" Value="Bold" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                </Style>
-            </Grid.Resources>
+            <Grid Margin="5" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="Margin" Value="4" />
+                        <Setter Property="FontFamily" Value="Bitstream Vera Sans Mono" />
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="HorizontalAlignment" Value="Right" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="FontFamily" Value="Bitstream Vera Sans Mono" />
+                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </Grid.Resources>
 
-            <Label Content="Name" Grid.Row="0" Grid.Column="0" Margin="0,3,157,5"/>
-            <Label Content="Health"       Grid.Row="1" Grid.Column="0" />
-            <Label Content="Move Speed"	    Grid.Row="2" Grid.Column="0" />
-            <Label Content="Damage"   Grid.Row="3" Grid.Column="0" />
-            <Label Content="Attack Speed"   Grid.Row="4" Grid.Column="0" />
-            <Label Content="Score Value"         Grid.Row="5" Grid.Column="0" />
-            <Label Content="Spawn Time"		Grid.Row="6" Grid.Column="0" />
-
-            <TextBox Grid.Row="0" Text="{Binding SelectedItem.Name}" Margin="117,5,5,5" Grid.ColumnSpan="2"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItem.Health}" />
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.MoveSpeed}" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedItem.Damage}" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedItem.AttackSpeed}" />
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedItem.ScoreValue}" />
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SelectedItem.SpawnTime}" />
+                <Label Content="Name"           Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
+                <Label Content="Health"         Grid.Row="1" Grid.Column="0" />
+                <Label Content="Move Speed"	    Grid.Row="2" Grid.Column="0" />
+                <Label Content="Damage"         Grid.Row="3" Grid.Column="0" />
+                <Label Content="Attack Speed"   Grid.Row="4" Grid.Column="0" />
+                <Label Content="Score Value"    Grid.Row="5" Grid.Column="0" />
+                <Label Content="Spawn Time"		Grid.Row="6" Grid.Column="0" />
+                
+                <!--UpdateSourceTrigger makes it so that the view is updated whenever there is a change in the textBox, not just when you're done editing-->
+                <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}" Margin="70,7,5,7" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItem.Health}" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.MoveSpeed}" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedItem.Damage}" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedItem.AttackSpeed}" />
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedItem.ScoreValue}" />
+                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SelectedItem.SpawnTime}" />
+            </Grid>
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="4" />
+                        <Setter Property="BorderThickness" Value="2" />
+                    </Style>
+                </Grid.Resources>
+                <Button Content="New"       Grid.Row="0" Grid.Column="0" Command="{Binding Path=NewCommand}" />
+                <Button Content="Remove"    Grid.Row="1" Grid.Column="0" Command="{Binding Path=RemoveCommand}" />
+                <Button Content="Default"   Grid.Row="6" Grid.Column="0" Command="{Binding Path=DefaultCommand}" />
+                <Button Content="Save"      Grid.Row="6" Grid.Column="1" Command="{Binding Path=SaveCommand}" />
+                <Button Content="Load"      Grid.Row="6" Grid.Column="2" Command="{Binding Path=LoadCommand}" />
+                <ListBox Margin="4"         Grid.Row="0" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2" 
+                         ItemsSource="{Binding Enemies}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="Name"/>
+            </Grid>
         </Grid>
-        <Button Content="New" Grid.Column="1" Margin="10,10,0,271" BorderThickness="2" Command="{Binding Path=NewCommand}" HorizontalAlignment="Left" Width="75" />
-        <Button Content="Remove" Grid.Column="1" Margin="10,53,0,226" BorderThickness="2" Command="{Binding Path=RemoveCommand}" HorizontalAlignment="Left" Width="75" />
-        <Button Content="Default" Grid.Column="1" Margin="10,274,0,10" BorderThickness="2" Command="{Binding Path=DefaultCommand}" HorizontalAlignment="Left" Width="75"/>
-        <Button Content="Save" Grid.Column="1" Margin="90,274,0,10" BorderThickness="2" Command="{Binding Path=SaveCommand}" HorizontalAlignment="Left" Width="75"/>
-        <Button Content="Load" Grid.Column="1" Margin="170,274,0,10" BorderThickness="2" Command="{Binding Path=LoadCommand}" HorizontalAlignment="Left" Width="84"/>
-        <ListBox Margin="186,10,10,175" ItemsSource="{Binding Enemies}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" DisplayMemberPath="Name" Grid.Column="1" Grid.Row="1"/>
-
     </Grid>
 </Window>

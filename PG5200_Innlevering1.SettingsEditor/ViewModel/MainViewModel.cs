@@ -6,7 +6,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using PG5200_Innlevering1.SettingsEditor.Model;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Windows;
 
 namespace PG5200_Innlevering1.SettingsEditor.ViewModel
 {
@@ -18,8 +20,20 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        public Level _level;
-        
+        private Level _level;
+
+        public Level Level
+        {
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+                RaisePropertyChanged(() => Level);
+            }
+        }
         public ObservableCollection<Enemy> Enemies {
             get
             {
@@ -28,18 +42,22 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
             set
             {
                 _level.Enemies = value;
+                RaisePropertyChanged(() => Enemies);
             }
         }
         private Enemy _selectedItem { get; set; }
         public Enemy SelectedItem {
             get
             {   
+                if (_selectedItem != null)
+                    return _selectedItem;
+
                 return _selectedItem;
             }
             set
-            { 
+            {
                 _selectedItem = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged(() => SelectedItem);
             }
         }
 
@@ -58,17 +76,19 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            _level = new Level();
-            _selectedItem = new Enemy();
+            Level = new Level();
+            
             CreateCommands();
+            
+            Load();
         }
 
         private void CreateCommands()
         {
             NewCommand = new RelayCommand(AddItem);
-            RemoveCommand = new RelayCommand(RemoveItem);
+            RemoveCommand = new RelayCommand(RemoveItem, CanRemove);
             DefaultCommand = new RelayCommand(DefaultLevel);
-            SaveCommand = new RelayCommand(Save, CanSave);
+            SaveCommand = new RelayCommand(Save);
             LoadCommand = new RelayCommand(Load);
         }
         public void AddItem()
@@ -88,17 +108,61 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         }
         public void RemoveItem()
         {
+            int i = Enemies.IndexOf(SelectedItem);
             Enemies.Remove(SelectedItem);
+
+            if (Enemies.Count > 0)
+            {
+                if (i == Enemies.Count)
+                    SelectedItem = Enemies[i - 1];
+                else
+                    SelectedItem = Enemies[i];
+            } 
         }
-        private bool CanSave()
+
+        private bool CanRemove()
         {
-            //TODO: Additional validation
+            //return SelectedItem != null;
             return true;
-        }
+        } 
 
         public void DefaultLevel()
         {
-            PopulateView(new Level());
+            Level model = new Level();
+            model.Enemies = new ObservableCollection<Enemy>
+            {
+                new Enemy()
+                {
+                    Name = "ZomBear",
+                    Health = 100,
+                    MoveSpeed = 2.5f,
+                    Damage = 15,
+                    AttackSpeed = 0.5f,
+                    ScoreValue = 10,
+                    SpawnTime = 3
+                },
+                new Enemy()
+                {
+                    Name = "ZomBunny",
+                    Health = 100,
+                    MoveSpeed = 3f,
+                    Damage = 10,
+                    AttackSpeed = 0.5f,
+                    ScoreValue = 10,
+                    SpawnTime = 3
+                },
+                new Enemy()
+                {
+                    Name = "Hellephant",
+                    Health = 100,
+                    MoveSpeed = 2f,
+                    Damage = 30,
+                    AttackSpeed = 0.5f,
+                    ScoreValue = 50,
+                    SpawnTime = 15
+                }
+            };
+            PopulateView(model);
         }
 
         private string path = "../../Level.json";
@@ -115,27 +179,17 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         {
             StreamReader reader = new StreamReader(path);
 
-            Level model = _level.Load(reader.ReadToEnd());
-
-            if (model != null)
-                PopulateView(model);
-
+            Level model = Level.Load(reader.ReadToEnd());
+        
             reader.Close();
+
+            PopulateView(model);
         }
 
         public void PopulateView(Level model)
         {
-            
+            Level = model;
+            Enemies = model.Enemies;
         }
-        /*private void SetDefaults()
-        {
-            Name = "Zom";
-            Health = 100;
-            MoveSpeed = 2.5f;
-            Damage = 10;
-            AttackSpeed = 0.5f;
-            ScoreValue = 10;
-            SpawnTime = 3;
-        }*/
     }
 }
