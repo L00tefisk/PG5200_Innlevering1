@@ -58,7 +58,7 @@
                     </Style>
                 </Grid.Resources>
 
-                <Label Content="Name"           Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
+                <Label Content="Type"           Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left"/>
                 <Label Content="Health"         Grid.Row="1" Grid.Column="0" />
                 <Label Content="Move Speed"	    Grid.Row="2" Grid.Column="0" />
                 <Label Content="Damage"         Grid.Row="3" Grid.Column="0" />
@@ -67,7 +67,7 @@
                 <Label Content="Spawn Time"		Grid.Row="6" Grid.Column="0" />
                 
                 <!--UpdateSourceTrigger makes it so that the view is updated whenever there is a change in the textBox, not just when you're done editing-->
-                <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SelectedItem.Name, UpdateSourceTrigger=PropertyChanged}" Margin="70,7,5,7" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SelectedItem.TypeName, UpdateSourceTrigger=PropertyChanged}" Margin="70,7,5,7" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItem.Health}" />
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.MoveSpeed}" />
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedItem.Damage}" />
@@ -102,7 +102,7 @@
                 <Button Content="Save"      Grid.Row="6" Grid.Column="1" Command="{Binding Path=SaveCommand}" />
                 <Button Content="Load"      Grid.Row="6" Grid.Column="2" Command="{Binding Path=LoadCommand}" />
                 <ListBox Margin="4"         Grid.Row="0" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2" 
-                         ItemsSource="{Binding Enemies}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="Name"/>
+                         ItemsSource="{Binding Enemies}" SelectedItem="{Binding SelectedItem}" DisplayMemberPath="TypeName"/>
             </Grid>
         </Grid>
     </Grid>

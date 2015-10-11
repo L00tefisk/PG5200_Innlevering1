@@ -12,7 +12,7 @@ namespace PG5200_Innlevering1.SettingsEditor.Model
 {
 	public class Enemy 
     {        
-        public string Name { get; set; }
+        public string TypeName { get; set; }
         
         public int Health { get; set; }
         public float MoveSpeed { get; set; }
@@ -30,7 +30,7 @@ namespace PG5200_Innlevering1.SettingsEditor.Model
 
 		private void SetDefaults()
 		{
-            Name = "";
+            TypeName = "";
             Health = 0;
             MoveSpeed = 0f;
             Damage = 0;

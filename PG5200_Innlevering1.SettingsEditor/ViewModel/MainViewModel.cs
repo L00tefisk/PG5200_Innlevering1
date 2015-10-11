@@ -95,7 +95,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         {
             Enemies.Add(
                 new Enemy() {
-                    Name = "New Enemy",
+                    TypeName = "New Enemy",
                     Health = 100,
                     MoveSpeed = 2.5f,
                     Damage = 10,
@@ -133,7 +133,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
             {
                 new Enemy()
                 {
-                    Name = "ZomBear",
+                    TypeName = "ZomBear",
                     Health = 100,
                     MoveSpeed = 2.5f,
                     Damage = 15,
@@ -143,7 +143,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
                 },
                 new Enemy()
                 {
-                    Name = "ZomBunny",
+                    TypeName = "ZomBunny",
                     Health = 100,
                     MoveSpeed = 3f,
                     Damage = 10,
@@ -153,7 +153,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
                 },
                 new Enemy()
                 {
-                    Name = "Hellephant",
+                    TypeName = "Hellephant",
                     Health = 100,
                     MoveSpeed = 2f,
                     Damage = 30,
