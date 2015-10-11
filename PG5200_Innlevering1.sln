@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PG5200_Innlevering1.CSharp", "PG5200_Innlevering1.CSharp.csproj", "{75B19F21-5B78-5956-5528-BD6C5F97AD06}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PG5200_Innlevering1.CSharp.Editor", "PG5200_Innlevering1.CSharp.Editor.csproj", "{5C7891B4-828F-290E-45D2-6800444F4E9B}"
