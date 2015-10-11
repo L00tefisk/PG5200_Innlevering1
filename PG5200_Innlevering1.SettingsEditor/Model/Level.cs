@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+
+using Newtonsoft.Json;
+
+using UnityEditor;
+using UnityEngine;
+//using CompleteProject;
 
 namespace PG5200_Innlevering1.SettingsEditor.Model
 {
     public class Level
     {
+        
         public ObservableCollection<Enemy> Enemies { get; set; }
 
         public Level()
