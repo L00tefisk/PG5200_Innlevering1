@@ -20,6 +20,27 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        private string _selectedType { get; set; }
+        public string SelectedType
+        {
+            get
+            {
+                return _selectedType;
+            }
+            set
+            {
+                _selectedType = value;
+                RaisePropertyChanged(() => SelectedType);
+            }
+        }
+        public ObservableCollection<String> EnemyTypes
+        {
+            get
+            {
+                return _level.EnemyTypes;
+            }
+        }
+
         private Level _level;
 
         public Level Level
@@ -49,9 +70,6 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         public Enemy SelectedItem {
             get
             {   
-                if (_selectedItem != null)
-                    return _selectedItem;
-
                 return _selectedItem;
             }
             set
@@ -95,7 +113,7 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
         {
             Enemies.Add(
                 new Enemy() {
-                    TypeName = "New Enemy",
+                    TypeName = "",
                     Health = 100,
                     MoveSpeed = 2.5f,
                     Damage = 10,
@@ -161,6 +179,12 @@ namespace PG5200_Innlevering1.SettingsEditor.ViewModel
                     ScoreValue = 50,
                     SpawnTime = 15
                 }
+            };
+            model.EnemyTypes = new ObservableCollection<string>()
+            {
+                "ZomBear",
+                "ZomBunny",
+                "Hellephant"
             };
             PopulateView(model);
         }

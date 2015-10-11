@@ -7,12 +7,14 @@ using System.IO;
 
 public class Level
 {
-    
+    public List<string> EnemyTypes { get; set; }
     public List<Enemy> Enemies { get; set; }
 
     public Level()
     {
         Enemies = new List<Enemy>();
+
+        EnemyTypes = new List<string>();
     }
 
     private JsonSerializerSettings _config = new JsonSerializerSettings

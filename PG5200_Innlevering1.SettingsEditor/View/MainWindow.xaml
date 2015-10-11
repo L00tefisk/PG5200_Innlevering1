@@ -67,7 +67,7 @@
                 <Label Content="Spawn Time"		Grid.Row="6" Grid.Column="0" />
                 
                 <!--UpdateSourceTrigger makes it so that the view is updated whenever there is a change in the textBox, not just when you're done editing-->
-                <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding SelectedItem.TypeName, UpdateSourceTrigger=PropertyChanged}" Margin="70,7,5,7" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
+                <ComboBox Grid.Row="0" Grid.Column="0"  ItemsSource="{Binding EnemyTypes}" SelectedItem="{Binding SelectedItem.TypeName}" Margin="70,7,5,7" Grid.ColumnSpan="2" VerticalAlignment="Stretch"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItem.Health}" />
                 <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.MoveSpeed}" />
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedItem.Damage}" />

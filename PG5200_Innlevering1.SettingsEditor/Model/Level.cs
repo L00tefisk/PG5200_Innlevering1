@@ -11,11 +11,16 @@ namespace PG5200_Innlevering1.SettingsEditor.Model
 {
     public class Level
     {
+
+        public ObservableCollection<string> EnemyTypes { get; set; }
+
         public ObservableCollection<Enemy> Enemies { get; set; }
 
         public Level()
         {
             Enemies = new ObservableCollection<Enemy>();
+
+            EnemyTypes = new ObservableCollection<string>() {};
         }
 
         private JsonSerializerSettings _config = new JsonSerializerSettings
